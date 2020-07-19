@@ -1,0 +1,7 @@
+{
+  "name": "Apéro",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
