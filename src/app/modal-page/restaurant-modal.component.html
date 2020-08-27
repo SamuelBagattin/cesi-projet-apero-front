@@ -1,0 +1,123 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title><span *ngIf="isCreationMode">Nouveau Restaurant</span><span *ngIf="isUpdateMode">Modification de {{formData.nom}}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">Annuler</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <form [formGroup]="formGroup">
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+                <ion-label position="stacked">Nom
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="text" [formControl]="nameFormControl"></ion-input>
+            </ion-item>
+
+            <ion-list>
+                <ion-list-header>
+                    <ion-label>
+                        <b>Catégorie</b>
+                    </ion-label>
+                </ion-list-header>
+
+                <ion-item>
+                    <ion-label>Catégorie existante</ion-label>
+                    <ion-select placeholder="Select One" [formControl]="this.categoryFormControl">
+                        <ion-select-option *ngFor="let category of restaurantsService.categoriesChanges | async" class="ion-text-wrap"
+                                           [value]="category.id">{{category.libelle}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-input type="text" placeholder="Nouvelle Catégorie" [formControl]="this.newCategoryFormControl"></ion-input>
+                    <ion-icon name="add-circle-outline" slot="end" (click)="this.submitCategory()" style="cursor:pointer;"></ion-icon>
+                </ion-item>
+
+            </ion-list>
+
+            <ion-list>
+                <ion-list-header>
+                    <ion-label>
+                        <b>T'en as pensé quoi ?</b>
+                    </ion-label>
+                </ion-list-header>
+
+                <ion-item>
+                    <ion-label position="stacked">Prix Moyen</ion-label>
+                    <ion-input required [formControl]="this.prixMoyenFormControl" type="number" step="0.1"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Note</ion-label>
+                    <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteFormControl">
+                        <ion-select-option *ngFor="let note of noteOptions"
+                                           [value]="note.note">{{note.note}} {{note.emoji}} </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Note de copiosité</ion-label>
+                    <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteCopiositeFormControl">
+                        <ion-select-option *ngFor="let note of noteOptions"
+                                           [value]="note.note">{{note.note}} {{note.emoji}} </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Note de déliciosité</ion-label>
+                    <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteDeliciositeFormControl">
+                        <ion-select-option *ngFor="let note of noteOptions"
+                                           [value]="note.note">{{note.note}} {{note.emoji}} </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Note de cadre</ion-label>
+                    <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteCadreFormControl">
+                        <ion-select-option *ngFor="let note of noteOptions"
+                                           [value]="note.note">{{note.note}} {{note.emoji}} </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-label>Note d'accueil</ion-label>
+                    <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteAccueilFormControl">
+                        <ion-select-option *ngFor="let note of noteOptions"
+                                           [value]="note.note">{{note.note}} {{note.emoji}} </ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-textarea placeholder="Appréciation" [formControl]="appreciationFormControl"></ion-textarea>
+                </ion-item>
+
+            </ion-list>
+
+
+            <ion-list>
+                <ion-list-header>
+                    <ion-label>
+                        <b>Localisation</b>
+                    </ion-label>
+                </ion-list-header>
+                <ion-item>
+                    <ion-label>Quartier existant</ion-label>
+                    <ion-select placeholder="Select One" [formControl]="quartierFormControl">
+                        <ion-select-option *ngFor="let quartier of restaurantsService.quartiersChanges | async" class="ion-text-wrap"
+                                           [value]="quartier.id">{{quartier.libelle}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+                <ion-item>
+                    <ion-input type="text" placeholder="Nouveau Quartier" [formControl]="this.newQuartierFormControl"></ion-input>
+                    <ion-icon name="add-circle-outline" slot="end" (click)="this.submitQuartier()" style="cursor:pointer;"></ion-icon>
+                </ion-item>
+                <ion-item>
+                    <ion-label position="stacked">Addresse</ion-label>
+                    <ion-input placeholder="Adresse" [formControl]="adresseFormControl"></ion-input>
+                    <ion-input placeholder="Ville" [formControl]="villeFormControl"></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-list>
+
+        <div class="ion-padding">
+            <ion-button *ngIf="isCreationMode" expand="block" type="submit" class="ion-no-margin" (click)="submitRestaurant()">Create</ion-button>
+            <ion-button *ngIf="isUpdateMode" expand="block" type="submit" class="ion-no-margin" (click)="updateRestaurant()">Update</ion-button>
+        </div>
+    </form>
+</ion-content>
