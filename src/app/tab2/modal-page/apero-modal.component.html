@@ -1,0 +1,25 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title><span *ngIf="isCreationMode">Nouveau Restaurant</span><span *ngIf="isUpdateMode">Modification de {{formData.nom}}</span></ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">Annuler</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <form [formGroup]="formGroup">
+        <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+                <ion-label position="stacked">Nom
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input required type="text" [formControl]="nameFormControl"></ion-input>
+            </ion-item>
+        </ion-list>
+
+        <div class="ion-padding">
+            <ion-button *ngIf="isCreationMode" expand="block" type="submit" class="ion-no-margin" (click)="submitApero()">Create</ion-button>
+<!--            <ion-button *ngIf="isUpdateMode" expand="block" type="submit" class="ion-no-margin" (click)="updateApero()">Update</ion-button>-->
+        </div>
+    </form>
+</ion-content>

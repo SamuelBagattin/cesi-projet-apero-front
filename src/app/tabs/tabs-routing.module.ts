@@ -8,11 +8,11 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'restaurants',
+        path: 'endroits',
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
-        path: 'sondages',
+        path: 'aperos',
         loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
       },
       {
@@ -21,14 +21,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/restaurants',
+        redirectTo: '/tabs/aperos',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/restaurants',
+    redirectTo: '/tabs/aperos',
     pathMatch: 'full'
   }
 ];

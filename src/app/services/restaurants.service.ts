@@ -7,6 +7,8 @@ import {Quartier} from '../models/quartier';
 import {RestaurantsRepository} from '../repositories/restaurants-repository.service';
 import {CategoriesRepository} from '../repositories/categories-repository.service';
 import {QuartiersRepository} from '../repositories/quartiers-repository.service';
+import {Apero} from '../models/apero';
+import {AperosRepository} from '../repositories/aperos-repository.service';
 
 @Injectable({
     providedIn: 'root'
@@ -22,15 +24,21 @@ export class RestaurantsService {
     private quartiersSubject: BehaviorSubject<Quartier[]> = new BehaviorSubject<Quartier[]>([]);
     public quartiersChanges: Observable<Quartier[]> = this.quartiersSubject.asObservable();
 
+    private aperosSubject: BehaviorSubject<Apero[]> = new BehaviorSubject<Apero[]>([]);
+    public aperosChanges: Observable<Apero[]> = this.aperosSubject.asObservable();
+
+
     constructor(
         private readonly httpclient: HttpClient,
         private readonly restaurantsRepository: RestaurantsRepository,
         private readonly categoriesRespository: CategoriesRepository,
-        private readonly quartiersRepository: QuartiersRepository
+        private readonly quartiersRepository: QuartiersRepository,
+        private readonly aperoRepository: AperosRepository
     ) {
         this.refreshRestaurants();
         this.refreshCategories();
         this.refreshQuartiers();
+        this.refreshAperos();
     }
 
     public refreshRestaurants(): void {
@@ -65,6 +73,16 @@ export class RestaurantsService {
 
     public addQuartier(quartier: Quartier): Observable<void> {
         return this.quartiersRepository.addQuartier(quartier);
+    }
+
+    public refreshAperos(): void {
+        this.aperoRepository.getAperos().subscribe((e: Apero[]) => {
+            this.aperosSubject.next(e);
+        });
+    }
+
+    public addApero(apero: Apero): Observable<void> {
+        return this.aperoRepository.addApero(apero);
     }
 
 

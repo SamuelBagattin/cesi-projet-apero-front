@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {RestaurantsService} from '../services/restaurants.service';
 import {Restaurant} from '../models/restaurant';
 import {ModalController} from '@ionic/angular';
-import {RestaurantModalComponent, RestaurantModalMode} from '../modal-page/restaurant-modal.component';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {RestaurantModalComponent, RestaurantModalMode} from './modal-page/restaurant-modal.component';
 
 @Component({
     selector: 'app-tab1',

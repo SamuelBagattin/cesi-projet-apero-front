@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Category} from '../models/category';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriesRepository {
-  private readonly categoryUrl = 'http://localhost:8080/restaurantCategories';
+  private readonly categoryUrl = environment.api.apero.basePath + environment.api.apero.routes.categories;
 
   constructor(private readonly httpClient: HttpClient) { }
 

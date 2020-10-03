@@ -6,7 +6,7 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import {RestaurantModalComponent} from '../modal-page/restaurant-modal.component';
+import {RestaurantModalComponent} from './modal-page/restaurant-modal.component';
 
 @NgModule({
     imports: [

@@ -3,7 +3,18 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+    api: {
+        apero: {
+            basePath: 'https://api.apero.samuelbagattin.com',
+            routes: {
+                endroits: '/places',
+                categories: '/placeCategories',
+                quartiers: '/placeDistrict',
+                aperos: '/happyHour'
+            }
+        }
+    }
 };
 
 /*
