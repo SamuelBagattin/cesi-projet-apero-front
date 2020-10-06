@@ -15,7 +15,7 @@ import {AperoModalComponent} from './modal-page/apero-modal.component';
         FormsModule,
         ExploreContainerComponentModule,
         Tab2PageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
     ],
     declarations: [Tab2Page, AperoModalComponent]
 })

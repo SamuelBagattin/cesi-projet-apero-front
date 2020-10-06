@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RouteConstants} from '../route-constants';
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +8,6 @@ import { Component } from '@angular/core';
 })
 export class TabsPage {
 
-  constructor() {}
+  constructor(public readonly routingConstants: RouteConstants) {}
 
 }

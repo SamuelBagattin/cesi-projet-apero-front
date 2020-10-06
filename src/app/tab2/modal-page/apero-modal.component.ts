@@ -5,6 +5,8 @@ import {Category} from '../../models/category';
 import {Quartier} from '../../models/quartier';
 import {Restaurant} from '../../models/restaurant';
 import {RestaurantsService} from '../../services/restaurants.service';
+import {DatePicker} from '@ionic-native/date-picker/ngx';
+import {Apero} from '../../models/apero';
 
 export enum AperoModalMode {
     CREATE,
@@ -23,12 +25,14 @@ export class AperoModalComponent implements OnInit {
     public isCreationMode: boolean;
 
     public nameFormControl: FormControl = new FormControl('', [Validators.required]);
+    public dateFormControl: FormControl = new FormControl('', [Validators.required]);
 
     public formGroup: FormGroup = new FormGroup({
-        nom: this.nameFormControl
+        nom: this.nameFormControl,
+        date: this.dateFormControl
     });
 
-    @Input() public formData: Restaurant = null;
+    @Input() public formData: Apero = null;
 
     public constructor(private readonly modalController: ModalController,
                        public readonly restaurantsService: RestaurantsService,
@@ -47,18 +51,31 @@ export class AperoModalComponent implements OnInit {
     }
 
     public subscribeToForm() {
-        this.formGroup.valueChanges.subscribe((e: Restaurant) => {
+        this.formGroup.valueChanges.subscribe((e: Apero) => {
             if (this.formGroup.valid) {
-                const oldData: Restaurant = Object.assign({}, this.formData);
+                const oldData: Apero = Object.assign({}, this.formData);
+                e.dateCreation = new Date();
+                e.createur_Id = 1;
                 this.formData = e;
                 this.formData.id = oldData.id;
             }
         });
     }
 
+    // public showDatePicker() {
+    //     this.datepicker.show({
+    //         date: new Date(),
+    //         mode: 'date',
+    //         androidTheme: this.datepicker.ANDROID_THEMES.THEME_HOLO_DARK
+    //     }).then(
+    //         date => console.log('Got date: ', date),
+    //         err => console.log('Error occurred while getting date: ', err)
+    //     );
+    // }
+
     public submitApero() {
         if (this.formGroup.valid) {
-            this.restaurantsService.addRestaurant(this.formData).subscribe(async () => {
+            this.restaurantsService.addApero(this.formData).subscribe(async () => {
                     await this.presentToast(`L'apéro ${this.formData.nom} a bien été ajouté`);
                     await this.dismissModal();
                 },

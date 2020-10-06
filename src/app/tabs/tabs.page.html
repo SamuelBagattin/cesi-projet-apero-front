@@ -1,19 +1,19 @@
 <ion-tabs>
 
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="endroits">
+        <ion-tab-button [tab]="routingConstants.endroits">
             <ion-icon name="pizza"></ion-icon>
             <ion-label>Endroits</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="aperos">
+        <ion-tab-button [tab]="routingConstants.aperos">
             <ion-icon name="wine"></ion-icon>
             <ion-label>Apéros</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="liste-courses">
-            <ion-icon name="square"></ion-icon>
-            <ion-label>Tab 3</ion-label>
+        <ion-tab-button [tab]="routingConstants.profil">
+            <ion-icon name="person"></ion-icon>
+            <ion-label>Mon profil</ion-label>
         </ion-tab-button>
     </ion-tab-bar>
 

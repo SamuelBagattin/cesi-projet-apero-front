@@ -7,21 +7,23 @@ import {RestaurantModalComponent, RestaurantModalMode} from '../tab1/modal-page/
 import {Restaurant} from '../models/restaurant';
 import {ModalController} from '@ionic/angular';
 import {AperoModalComponent, AperoModalMode} from './modal-page/apero-modal.component';
+import {DeviceService} from '../services/device.service';
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+    selector: 'app-tab2',
+    templateUrl: 'tab2.page.html',
+    styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit{
+export class Tab2Page implements OnInit {
 
     public aperosChanges: Observable<Apero[]>;
 
 
-  constructor(private readonly restaurantsService: RestaurantsService, private readonly modalController: ModalController) {}
+    constructor(private readonly restaurantsService: RestaurantsService, private readonly modalController: ModalController, public readonly deviceService: DeviceService) {
+    }
 
     ngOnInit(): void {
-        this.aperosChanges = this.restaurantsService.aperosChanges.pipe(map((e: Apero[]) => e.sort((a, b) => a.id - b.id)));
+        this.aperosChanges = this.restaurantsService.aperosChanges.pipe(map((e: Apero[]) => e.sort((a, b) => b.date.valueOf() - a.date.valueOf())));
     }
 
     async presentAddAperoModal() {
