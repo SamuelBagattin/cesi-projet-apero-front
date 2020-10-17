@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, fromEvent, Observable} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { fromEvent, BehaviorSubject, Observable } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class DeviceService {
     private readonly isMobileSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -12,9 +12,10 @@ export class DeviceService {
     constructor() {
         const checkScreenSize = () => document.body.offsetWidth < 900;
         this.isMobileSubject.next(checkScreenSize());
-        fromEvent(window, 'resize').pipe(debounceTime(100)).subscribe(() => {
-            this.isMobileSubject.next(checkScreenSize());
-        });
+        fromEvent(window, 'resize')
+            .pipe(debounceTime(100))
+            .subscribe(() => {
+                this.isMobileSubject.next(checkScreenSize());
+            });
     }
-
 }

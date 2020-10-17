@@ -1,29 +1,26 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Restaurant} from '../../models/restaurant';
-import {Category} from '../../models/category';
-import {Quartier} from '../../models/quartier';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Category } from '../../models/category';
+import { Quartier } from '../../models/quartier';
+import { Restaurant } from '../../models/restaurant';
 
 @Component({
-  selector: 'app-category-view',
-  templateUrl: './category-view.component.html',
-  styleUrls: ['./category-view.component.scss'],
+    selector: 'app-category-view',
+    templateUrl: './category-view.component.html',
+    styleUrls: ['./category-view.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryViewComponent implements OnInit {
+export class CategoryViewComponent {
+    @Input() public restaurants: Restaurant[] = [];
+    @Input() public categories: Category[] = [];
+    @Input() public quartiers: Quartier[] = [];
 
-    @Input() restaurants: Restaurant[] = [];
-    @Input() categories: Category[] = [];
-    @Input() quartiers: Quartier[] = [];
+    @Output() public readonly editEndroit: EventEmitter<Restaurant> = new EventEmitter<Restaurant>();
 
-    @Output() editEndroit: EventEmitter<Restaurant> = new EventEmitter<Restaurant>();
-
-  ngOnInit() {}
-    public getRestaurantsOfCategory(categoryId: number): Restaurant[]{
+    public getRestaurantsOfCategory(categoryId: number): Restaurant[] {
         return this.restaurants.filter((endroit: Restaurant) => endroit.categorieid === categoryId);
     }
 
-    public sendEditEndroitEvent(endroit: Restaurant){
-      this.editEndroit.emit(endroit);
+    public sendEditEndroitEvent(endroit: Restaurant): void {
+        this.editEndroit.emit(endroit);
     }
-
-
 }

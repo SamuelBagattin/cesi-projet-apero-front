@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+    production: true,
     api: {
         apero: {
             basePath: 'https://api.apero.samuelbagattin.com',
@@ -7,9 +7,8 @@ export const environment = {
                 endroits: '/places',
                 categories: '/placeCategories',
                 quartiers: '/placeDistrict',
-                aperos: '/happyHour'
-            }
-        }
-    }
-
+                aperos: '/happyHour',
+            },
+        },
+    },
 };
