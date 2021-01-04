@@ -44,7 +44,7 @@
                 <ion-col>
                     <ion-list>
                         <ion-item *ngFor="let apero of aperosChanges | async">
-                            <ion-card class="app-card-desktop">
+                            <ion-card class="app-card-desktop" button="true" [routerLink]="[apero.id]">
                                 <ion-card-header>
                                     <ion-card-subtitle>{{apero.date | date:'d MMMM y'}}</ion-card-subtitle>
                                     <ion-card-title>{{apero.nom}}</ion-card-title>

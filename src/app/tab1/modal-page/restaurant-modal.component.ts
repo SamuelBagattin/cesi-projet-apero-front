@@ -23,7 +23,6 @@ export class RestaurantModalComponent implements OnInit {
     public isCreationMode: boolean;
 
     public nameFormControl: FormControl = new FormControl('', [Validators.required]);
-    public noteFormControl: FormControl = new FormControl('', [Validators.required]);
     public appreciationFormControl: FormControl = new FormControl('', [Validators.required]);
     public prixMoyenFormControl: FormControl = new FormControl('', [Validators.required]);
     public adresseFormControl: FormControl = new FormControl('', [Validators.required]);
@@ -37,7 +36,6 @@ export class RestaurantModalComponent implements OnInit {
 
     public formGroup: FormGroup = new FormGroup({
         nom: this.nameFormControl,
-        note: this.noteFormControl,
         appreciation: this.appreciationFormControl,
         prixmoyen: this.prixMoyenFormControl,
         adresse: this.adresseFormControl,
@@ -75,7 +73,6 @@ export class RestaurantModalComponent implements OnInit {
     public ngOnInit(): void {
         this.isCreationMode = this.mode === RestaurantModalMode.CREATE;
         this.isUpdateMode = this.mode === RestaurantModalMode.UPDATE;
-        console.log(this.formData);
         this.newCategoryFormControl.valueChanges.subscribe((e: string) => {
             this.newCategory.libelle = e;
         });
@@ -83,7 +80,7 @@ export class RestaurantModalComponent implements OnInit {
             this.newQuartier.libelle = e;
         });
         this.subscribeToForm();
-        if (this.isUpdateMode) {
+        if (this.isCreationMode) {
             return;
         }
         const formDataDup = this.formData;
@@ -92,7 +89,6 @@ export class RestaurantModalComponent implements OnInit {
             appreciation: formDataDup.appreciation,
             categorieid: formDataDup.categorieid,
             nom: formDataDup.nom,
-            note: formDataDup.note,
             noteaccueil: formDataDup.noteaccueil,
             notecadre: formDataDup.notecadre,
             notecopiosite: formDataDup.notecopiosite,
@@ -137,7 +133,7 @@ export class RestaurantModalComponent implements OnInit {
 
     public subscribeToForm(): void {
         this.formGroup.valueChanges.subscribe((e: Restaurant) => {
-            if (this.formGroup.valid) {
+            if (!this.formGroup.valid) {
                 return;
             }
             const oldData: Restaurant = Object.assign({}, this.formData);
@@ -147,8 +143,6 @@ export class RestaurantModalComponent implements OnInit {
     }
 
     public submitRestaurant(): void {
-        console.log(this.formGroup.valid);
-        console.log(this.formGroup.errors);
         if (!this.formGroup.valid) {
             return;
         }

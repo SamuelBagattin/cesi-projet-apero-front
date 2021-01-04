@@ -7,6 +7,7 @@ import { Tab2PageComponent } from './tab2-page.component';
 
 import { AperoModalComponent } from './modal-page/apero-modal.component';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import {AperoDetailComponent} from "./apero-detail/apero-detail.component";
 
 @NgModule({
     imports: [
@@ -17,6 +18,6 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
         Tab2PageRoutingModule,
         ReactiveFormsModule,
     ],
-    declarations: [Tab2PageComponent, AperoModalComponent],
+    declarations: [Tab2PageComponent, AperoModalComponent, AperoDetailComponent],
 })
 export class Tab2PageModule {}

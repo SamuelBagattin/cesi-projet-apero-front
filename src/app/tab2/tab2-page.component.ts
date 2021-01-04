@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { Apero } from '../models/apero';
+import { RouteConstants } from '../route-constants';
 import { DeviceService } from '../services/device.service';
 import { RestaurantsService } from '../services/restaurants.service';
 import { AperoModalComponent, AperoModalMode } from './modal-page/apero-modal.component';
@@ -19,6 +20,7 @@ export class Tab2PageComponent implements OnInit {
         private readonly restaurantsService: RestaurantsService,
         private readonly modalController: ModalController,
         public readonly deviceService: DeviceService,
+        public readonly routeConstants: RouteConstants,
     ) {}
 
     public ngOnInit(): void {

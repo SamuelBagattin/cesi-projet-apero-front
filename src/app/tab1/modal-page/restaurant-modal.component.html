@@ -49,13 +49,6 @@
                     <ion-input required [formControl]="this.prixMoyenFormControl" type="number" step="0.1"></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label>Note</ion-label>
-                    <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteFormControl">
-                        <ion-select-option *ngFor="let note of noteOptions"
-                                           [value]="note.note">{{note.note}} {{note.emoji}} </ion-select-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
                     <ion-label>Note de copiosité</ion-label>
                     <ion-select placeholder="Select One" style="max-width: 100%" [formControl]="noteCopiositeFormControl">
                         <ion-select-option *ngFor="let note of noteOptions"

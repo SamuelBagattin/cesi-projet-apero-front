@@ -30,7 +30,7 @@ export class Tab1PageComponent implements OnInit, OnDestroy {
         private readonly activatedRoute: ActivatedRoute,
         public readonly routingConstants: RouteConstants,
         private readonly router: Router,
-        private readonly changeDetectorRef: ChangeDetectorRef
+        private readonly changeDetectorRef: ChangeDetectorRef,
     ) {}
 
     public async switchToGroupByView(viewMode: string): Promise<void> {
@@ -67,13 +67,17 @@ export class Tab1PageComponent implements OnInit, OnDestroy {
                 } else {
                     await this.switchToGroupByView(this.routingConstants.endroitsGroupByCategory);
                 }
+                this.changeDetectorRef.markForCheck();
             });
         this.restaurantsSubscription = this.restaurantService.restaurantsChanges.subscribe((e: Restaurant[]) => {
             this.restaurants = e;
+            this.changeDetectorRef.markForCheck();
         });
         this.categoriesSubscription = this.restaurantService.categoriesChanges.subscribe((e: Category[]) => {
             this.categories = e;
+            this.changeDetectorRef.markForCheck();
         });
+        this.changeDetectorRef.markForCheck();
     }
 
     public async presentAddRestaurantModal(): Promise<void> {

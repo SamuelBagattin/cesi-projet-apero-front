@@ -6,12 +6,14 @@ export const environment = {
     production: false,
     api: {
         apero: {
-            basePath: 'https://api.apero.samuelbagattin.com',
+            basePath: 'http://localhost:8080',
             routes: {
                 endroits: '/places',
                 categories: '/placeCategories',
-                quartiers: '/placeDistrict',
-                aperos: '/happyHour',
+                quartiers: '/place-districts',
+                aperos: '/happy-hours',
+                users: '/users',
+                votes: '/votes',
             },
         },
     },
