@@ -1,3 +1,25 @@
-<p>
-  Apéro numéro : {{(activatedRoute.params | async )['id']}}
-</p>
+
+<ion-header [translucent]="false">
+  <ion-toolbar *ngIf="selectedAperoChanges | async">
+    <ion-item>{{(this.selectedAperoChanges | async).nom}}</ion-item>
+    <ion-item><ion-icon name="calendar-outline"></ion-icon> {{(this.selectedAperoChanges | async).dateApero | date:'d MMMM y'}}</ion-item>
+    <ion-item><ion-icon name="person-outline"></ion-icon> {{(this.selectedAperoChanges | async).user.nom}} <ion-icon name="calendar-clear-outline"></ion-icon> {{(this.selectedAperoChanges | async).dateCreation | date:'d MMMM y'}}</ion-item>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div *ngIf="columns && rows">
+    <ngx-datatable [rows]="rows | async" class="material" >
+      <ngx-datatable-column *ngFor="let col of columns | async" [name]="col.prop">
+        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row" let-value="value">
+          <b *ngIf="col.prop === 'Nom' else showCheckBox">{{row[col.prop]}}</b>
+          <ng-template #showCheckBox>
+            <ion-icon [name]="row[col.prop] ? 'checkbox-outline' : 'close-circle-outline'"></ion-icon>
+          </ng-template>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+
+</ion-content>
+

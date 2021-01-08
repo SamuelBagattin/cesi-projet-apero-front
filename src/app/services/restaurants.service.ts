@@ -27,7 +27,6 @@ export class RestaurantsService {
     public aperosChanges: Observable<Apero[]> = this.aperosSubject.asObservable();
 
     constructor(
-        private readonly httpclient: HttpClient,
         private readonly restaurantsRepository: RestaurantsRepository,
         private readonly categoriesRespository: CategoriesRepository,
         private readonly quartiersRepository: QuartiersRepository,

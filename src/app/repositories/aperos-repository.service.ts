@@ -13,7 +13,7 @@ export class AperosRepository {
     constructor(private readonly httpClient: HttpClient) {}
 
     public getAperos(): Observable<Apero[]> {
-        return this.httpClient.get<Apero[]>(this.aperosUrl);
+        return this.httpClient.get<Apero[]>(this.aperosUrl + '?include=user');
     }
 
     public addApero(apero: Apero): Observable<void> {
