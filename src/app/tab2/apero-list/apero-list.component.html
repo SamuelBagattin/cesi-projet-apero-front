@@ -1,0 +1,59 @@
+    <ion-grid>
+        <ion-row>
+            <ng-container *ngIf="deviceService.isMobileChanges | async else desktopDisplay">
+                <ion-col>
+                    <ion-list>
+                        <ng-container *ngFor="let apero of aperosChanges | async; let index = index">
+                            <ion-item>
+                                <ion-card class="app-card-mobile">
+                                    <ion-card-header>
+                                        <ion-card-subtitle>{{apero.dateApero | date:'d MMMM y'}}</ion-card-subtitle>
+                                        <ion-card-title>{{apero.nom}}</ion-card-title>
+                                    </ion-card-header>
+
+                                    <ion-card-content>
+                                        {{apero.createur_Id}} a créé cet apéro
+                                        le {{apero.dateCreation | date:'d MMMM y'}}
+                                    </ion-card-content>
+                                </ion-card>
+                                <!--                        <ion-icon name="create-outline" slot="end" style="cursor:pointer;" (click)="presentEditRestaurantModal(apero)"></ion-icon>-->
+                            </ion-item>
+                            <ion-item *ngIf="index % 3 == 0 && index < 6">
+                                <img *ngIf="index === 0" src="/assets/img/apero_green.svg" alt="">
+                                <img *ngIf="index === 3" src="assets/img/map_green.svg" alt="">
+                            </ion-item>
+                        </ng-container>
+
+                    </ion-list>
+                </ion-col>
+            </ng-container>
+            <ng-template #desktopDisplay>
+                <ion-col>
+                    <img src="/assets/img/apero_green.svg"
+                         alt="">
+                </ion-col>
+                <ion-col>
+                    <ion-list>
+                        <ion-item *ngFor="let apero of aperosChanges | async">
+                            <ion-card class="app-card-desktop" button="true" [routerLink]="[apero.id]">
+                                <ion-card-header>
+                                    <ion-card-subtitle>{{apero.dateApero | date:'d MMMM y'}}</ion-card-subtitle>
+                                    <ion-card-title>{{apero.nom}}</ion-card-title>
+                                </ion-card-header>
+
+                                <ion-card-content style="width: 100%">
+                                    {{apero.user.nom}} a créé cet apéro le {{apero.dateCreation | date:'d MMMM y'}}
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+
+            </ng-template>
+        </ion-row>
+    </ion-grid>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentAddAperoModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>

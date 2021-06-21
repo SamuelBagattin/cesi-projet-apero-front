@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Endroits
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+    <ng-container [ngSwitch]="groupQueryParam">
+        <app-category-view *ngSwitchCase="routingConstants.endroitsGroupByCategory" [categories]="categories" [restaurants]="restaurants" (editEndroit)="presentEditRestaurantModal($event)"></app-category-view>
+        <app-district-view *ngSwitchCase="routingConstants.endroitsGroupByQuartier"></app-district-view>
+    </ng-container>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="presentAddRestaurantModal()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+    <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+        <ion-fab-button color="dark">
+            <ion-icon md="caret-up" ios="chevron-up-circle-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            <ion-fab-button color="light" (click)="switchToGroupByView(this.routingConstants.endroitsGroupByCategory)">
+                <ion-icon name="bookmarks-outline"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="light" (click)="switchToGroupByView(this.routingConstants.endroitsGroupByQuartier)">
+                <ion-icon name="home-outline"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
+</ion-content>

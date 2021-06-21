@@ -1,0 +1,23 @@
+<ion-row>
+    <img src="assets/img/hamburger_blue.svg" alt="">
+</ion-row>
+<ion-row>
+    <ion-col>
+        <ion-list class="category-list">
+            <ng-container *ngFor="let category of categories">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-subtitle>Catégorie</ion-card-subtitle>
+                        <ion-card-title>{{category.libelle}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-item button="true" class="ion-activated" (click)="sendEditEndroitEvent(endroit)" *ngFor="let endroit of getRestaurantsOfCategory(category.id)">
+                        <ion-label>{{endroit.note}}
+                            <ion-icon name="star"></ion-icon>
+                            <span>{{endroit.nom}}</span></ion-label>
+                        <ion-icon></ion-icon>
+                    </ion-item>
+                </ion-card>
+            </ng-container>
+        </ion-list>
+    </ion-col>
+</ion-row>
