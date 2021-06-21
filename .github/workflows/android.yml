@@ -9,6 +9,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+      - run: chmod +x ./android/gradlew
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Build the app
