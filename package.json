@@ -10,7 +10,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "buil-apk": "ionic capacitor copy android && cd android && ./gradlew assembleDebug && ./gradlew installDebug"
+    "build-apk": "ionic capacitor copy android && cd android && ./gradlew assembleDebug && ./gradlew installDebug"
   },
   "private": true,
   "dependencies": {
