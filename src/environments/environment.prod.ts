@@ -6,8 +6,10 @@ export const environment = {
             routes: {
                 endroits: '/places',
                 categories: '/placeCategories',
-                quartiers: '/placeDistrict',
-                aperos: '/happyHour',
+                quartiers: '/place-districts',
+                aperos: '/happy-hours',
+                users: '/users',
+                votes: '/votes'
             },
         },
     },

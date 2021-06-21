@@ -13,7 +13,7 @@ export const environment = {
                 quartiers: '/place-districts',
                 aperos: '/happy-hours',
                 users: '/users',
-                votes: '/votes',
+                votes: '/votes'
             },
         },
     },
