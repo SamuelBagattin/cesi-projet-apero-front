@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { RestaurantModalComponent } from './restaurant-modal.component';
@@ -7,7 +7,7 @@ describe('ModalPageComponent', () => {
     let component: RestaurantModalComponent;
     let fixture: ComponentFixture<RestaurantModalComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [RestaurantModalComponent],
             imports: [IonicModule.forRoot()],

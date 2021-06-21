@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { strict } from 'assert';
-import { of, timer, BehaviorSubject, Observable, Subscription } from 'rxjs';
+import {  timer, BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Apero } from '../../models/apero';
 import { Vote } from '../../models/vote';
