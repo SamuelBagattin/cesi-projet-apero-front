@@ -18,7 +18,7 @@ jobs:
 
       - name: Get semver
         id: semver
-        run: echo "SEMVER=$(dotnet gitversion | jq -r '.FullSemVer') >> $GITHUB_ENV
+        run: echo "SEMVER=$(dotnet gitversion | jq -r '.FullSemVer')" >> $GITHUB_ENV
 
       - run: echo "${{ env.SEMVER }}"
 
