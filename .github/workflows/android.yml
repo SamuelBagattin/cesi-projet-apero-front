@@ -1,4 +1,4 @@
-name: Build
+name: Android
 on: [pull_request, push, workflow_dispatch]
 jobs:
   build:
@@ -14,3 +14,8 @@ jobs:
         run: yarn --frozen-lockfile
       - name: Build the app
         run: yarn run build-apk
+      - uses: sparkfabrik/android-build-action@v1.0.0
+        with:
+          project-path: android
+          output-path: my-app.apk
+      - run: tree -R
