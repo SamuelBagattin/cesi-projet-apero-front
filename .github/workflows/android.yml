@@ -20,8 +20,6 @@ jobs:
         id: semver
         run: echo "SEMVER=$(dotnet gitversion | jq -r '.FullSemVer')" >> $GITHUB_ENV
 
-      - run: echo "${{ env.SEMVER }}"
-
       - run: chmod +x ./android/gradlew
 
       - name: Install dependencies
@@ -33,9 +31,17 @@ jobs:
       - uses: sparkfabrik/android-build-action@v1.0.0
         with:
           project-path: android
-          output-path: apero.apk
+          output-path: apero.${{ env.SEMVER }}.apk
+
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: apero.${{ env.SEMVER }}.apk
 
       - uses: actions/upload-artifact@v2
         with:
           name: apk
-          path: ./apero.apk
+          path: apero.${{ env.SEMVER }}.apk
