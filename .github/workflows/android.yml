@@ -18,4 +18,7 @@ jobs:
         with:
           project-path: android
           output-path: my-app.apk
-      - run: tree -R
+      - uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: ./my-app.apk
