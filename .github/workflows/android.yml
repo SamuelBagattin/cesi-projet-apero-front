@@ -34,7 +34,7 @@ jobs:
           output-path: apero.${{ env.SEMVER }}.apk
 
       - name: upload artifact to Firebase App Distribution
-        run: yarn firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} apero.${{ env.SEMVER }}.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
+        run: yarn firebase appdistribution:distribute --app cesi-projet-apero apero.${{ env.SEMVER }}.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
 
       - uses: actions/upload-artifact@v2
         with:
