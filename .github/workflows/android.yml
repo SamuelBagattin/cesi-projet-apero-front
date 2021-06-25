@@ -16,6 +16,12 @@ jobs:
       - name: Install GitVersion
         run: dotnet tool install --global GitVersion.Tool
 
+      - name: test
+        run: dotnet gitversion
+
+      - name: test
+        run: dotnet gitversion --help
+
       - name: Get semver
         id: semver
         run: dotnet gitversion | jq -r '.FullSemVer'
