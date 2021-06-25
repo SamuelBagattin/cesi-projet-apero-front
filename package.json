@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic": "ionic",
-    "build-apk": "ionic capacitor copy android && ionic capacitor update android && cd android && ./gradlew assembleRelease && ./gradlew :base:bundleDebug && tree -R"
+    "build-apk": "ionic capacitor copy android && ionic capacitor update android && cd android && ./gradlew assembleRelease && ./gradlew bundleRelease && tree -R"
   },
   "private": true,
   "dependencies": {
