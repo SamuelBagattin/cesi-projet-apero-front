@@ -18,9 +18,9 @@ jobs:
 
       - name: Get semver
         id: semver
-        run: dotnet gitversion | jq -r '.FullSemVer'
+        run: echo "SEMVER=$(dotnet gitversion | jq -r '.FullSemVer') >> $GITHUB_ENV
 
-      - run: echo "${{ steps.semver.output }}"
+      - run: echo "${{ env.SEMVER }}"
 
       - run: chmod +x ./android/gradlew
 
