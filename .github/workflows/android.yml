@@ -6,19 +6,25 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
+
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+
       - run: chmod +x ./android/gradlew
+
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn install --frozen-lockfile
+
       - name: Build the app
         run: yarn run build-apk
+
       - uses: sparkfabrik/android-build-action@v1.0.0
         with:
           project-path: android
-          output-path: my-app.apk
+          output-path: apero.apk
+
       - uses: actions/upload-artifact@v2
         with:
           name: apk
-          path: ./my-app.apk
+          path: ./apero.apk
