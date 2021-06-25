@@ -11,6 +11,17 @@ jobs:
         with:
           node-version: '14'
 
+      - uses: actions/setup-dotnet@v1
+
+      - name: Install GitVersion
+        run: dotnet tool install --global GitVersion.Tool
+
+      - name: Get semver
+        id: semver
+        run: dotnet gitversion | jq -r '.FullSemVer'
+
+      - run: echo "${{ steps.semver.output }}"
+
       - run: chmod +x ./android/gradlew
 
       - name: Install dependencies
