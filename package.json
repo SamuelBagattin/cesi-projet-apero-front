@@ -10,7 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-apk": "ionic capacitor copy android && cd android && ./gradlew assembleDebug && ./gradlew installDebug"
+    "ionic": "ionic",
+    "build-apk": "ionic capacitor copy android && ionic capacitor update android && cd android && ./gradlew assembleDebug && ./gradlew installDebug"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +22,7 @@
     "@angular/platform-browser-dynamic": "~12.0.5",
     "@angular/router": "~12.0.5",
     "@capacitor/android": "^2.3.0",
-    "@capacitor/core": "2.3.0",
+    "@capacitor/core": "2.4.7",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/date-picker": "^5.28.0",
     "@ionic-native/splash-screen": "^5.0.0",
@@ -39,9 +40,9 @@
     "@angular/compiler": "~12.0.5",
     "@angular/compiler-cli": "~12.0.5",
     "@angular/language-service": "~12.0.5",
-    "@ionic/cli": "^6.16.3",
     "@capacitor/cli": "2.3.0",
     "@ionic/angular-toolkit": "^2.1.1",
+    "@ionic/cli": "^6.16.3",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
