@@ -57,11 +57,11 @@ jobs:
       - name: Download workspace
         uses: actions/download-artifact@v2
         with:
-          name: workspace.tar.gz
-          path: /tmp/workspace/workspace.tar.gz
+          name: workspace
+          path: /tmp/workspace
 
       - name: Untar workspace
-        run: tree -R && tar -xzf /tmp/workspace.tar.gz -C . && ls -latr
+        run: tree -R && tar -xzf /tmp/workspace/workspace.tar.gz -C . && ls -latr
 
       - name: Retreive semver
         run: echo "SEMVER=$(cat './semver.txt')" >> $GITHUB_ENV
