@@ -58,7 +58,7 @@ jobs:
           path: ./workspace.tar
 
       - name: Untar workspace
-        run: tar -xf ./workspace.tar && ls -latr
+        run: ls -latr && tar -xf ./workspace.tar && ls -latr
 
       - name: Retreive semver
         run: echo "SEMVER=$(cat './semver.txt')" >> $GITHUB_ENV
