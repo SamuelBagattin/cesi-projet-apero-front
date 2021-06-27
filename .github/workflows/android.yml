@@ -37,7 +37,7 @@ jobs:
         run: yarn firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} apero.${{ env.SEMVER }}.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
 
       - name: Create release
-        run: gh release create ${{ env.SEMVER }} 'apero.${{ env.SEMVER }}.apk' -t ${{ env.SEMVER }}
+        run: gh auth login --with-token ${{ secrets.GITHUB_TOKEN }} && gh release create ${{ env.SEMVER }} 'apero.${{ env.SEMVER }}.apk' -t ${{ env.SEMVER }}
 
       - uses: actions/upload-artifact@v2
         with:
