@@ -7,6 +7,9 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
+      - name: gh cli auth
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
@@ -37,7 +40,7 @@ jobs:
         run: yarn firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} apero.${{ env.SEMVER }}.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
 
       - name: Create release
-        run: gh auth login --with-token ${{ secrets.GITHUB_TOKEN }} && gh release create ${{ env.SEMVER }} 'apero.${{ env.SEMVER }}.apk' -t ${{ env.SEMVER }}
+        run: gh release create ${{ env.SEMVER }} 'apero.${{ env.SEMVER }}.apk' -t ${{ env.SEMVER }}
 
       - uses: actions/upload-artifact@v2
         with:
