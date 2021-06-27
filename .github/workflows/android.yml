@@ -4,12 +4,11 @@ jobs:
   build_test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event_name }}"
+      - name: Create output folders
+        run: mkdir artifacts
+
       - name: Checkout the code
         uses: actions/checkout@v2
-
-      - name: gh cli auth
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
 
       - uses: actions/setup-node@v2
         with:
@@ -30,12 +29,18 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build the app
-        run: yarn run build-apk
+        run: yarn run build-prod
+
+      - name: Package web
+        run: tar -czf ./artifacts/web.tar.gz www/.
+
+      - name: Prepare android build
+        run: yarn run prepare-android
 
       - uses: sparkfabrik/android-build-action@v1.0.0
         with:
           project-path: android
-          output-path: apero.${{ env.SEMVER }}.apk
+          output-path: ./artifacts/apero.apk
 
       - name: Tar workspace
         run: tar -czf /tmp/workspace.tar.gz .
@@ -51,9 +56,13 @@ jobs:
     needs: build_test
     if: ${{ github.ref == 'refs/heads/master' }}
     steps:
+      - name: gh cli auth
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
+
       - name: Download workspace
         uses: actions/download-artifact@v2
         with:
@@ -61,16 +70,16 @@ jobs:
           path: /tmp/workspace
 
       - name: Untar workspace
-        run: tree -R && tar -xzf /tmp/workspace/workspace.tar.gz -C . && ls -latr
+        run: tar -xzf /tmp/workspace/workspace.tar.gz -C .
 
       - name: Retreive semver
         run: echo "SEMVER=$(cat './semver.txt')" >> $GITHUB_ENV
 
       - name: upload apk to Firebase App Distribution
-        run: yarn firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} apero.${{ env.SEMVER }}.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
+        run: yarn firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} ./artifacts/apero.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
 
       - name: Create release
-        run: gh release create ${{ env.SEMVER }} 'apero.${{ env.SEMVER }}.apk' -t ${{ env.SEMVER }}
+        run: gh release create ${{ env.SEMVER }} './artifacts/apero.apk' './artifacts/web.tar.gz'  -t ${{ env.SEMVER }}
 
 
 

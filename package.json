@@ -11,7 +11,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ionic": "ionic",
-    "build-apk": "ionic capacitor copy android --prod && ionic capacitor update android",
+    "build-prod": "ng build -c production",
+    "prepare-android": "ionic capacitor copy android --no-build && ionic capacitor update android",
     "firebase": "firebase"
   },
   "private": true,
