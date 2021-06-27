@@ -13,6 +13,8 @@ jobs:
 
       - uses: actions/setup-dotnet@v1
 
+      - run: gh
+
       - name: Install GitVersion
         run: git fetch --unshallow && dotnet tool install --global GitVersion.Tool
 
