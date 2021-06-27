@@ -38,7 +38,7 @@ jobs:
           output-path: apero.${{ env.SEMVER }}.apk
 
       - name: Tar workspace
-        run: tar -czf /tmp/workspace.tar .
+        run: tar -czf /tmp/workspace.tar.gz .
 
       - uses: actions/upload-artifact@v2
         name: Upload workspace
