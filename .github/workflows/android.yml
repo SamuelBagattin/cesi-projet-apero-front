@@ -22,7 +22,7 @@ jobs:
 
       - name: Get semver
         id: semver
-        run: echo "SEMVER=$(dotnet gitversion | jq -r '.FullSemVer')" >> $GITHUB_ENV
+        run: echo "$(dotnet gitversion | jq -r '.FullSemVer')" >> ./semver.txt
 
       - run: chmod +x ./android/gradlew
 
@@ -37,13 +37,33 @@ jobs:
           project-path: android
           output-path: apero.${{ env.SEMVER }}.apk
 
-      - name: upload artifact to Firebase App Distribution
+      - name: Tar workspace
+        run: tar -czf /tmp/workspace.tar.gz .
+
+      - uses: actions/upload-artifact@v2
+        name: Upload workspace
+        with:
+          name: workspace.tar
+          path: /tmp/workspace.tar.gz
+
+  deploy_apk:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      - name: Download workspace
+        uses: actions/download-artifact@v2
+        with:
+          name: workspace.tar
+          path: ./workspace.tar
+
+      - name: Retreive semver
+        run: echo "SEMVER=$(cat './semver.txt')" >> $GITHUB_ENV
+
+      - name: upload apk to Firebase App Distribution
         run: yarn firebase appdistribution:distribute --app ${{ secrets.FIREBASE_APP_ID }} apero.${{ env.SEMVER }}.apk --token ${{ secrets.FIREBASE_TOKEN }} --groups testers --release-notes ${{ env.SEMVER }}
 
       - name: Create release
         run: gh release create ${{ env.SEMVER }} 'apero.${{ env.SEMVER }}.apk' -t ${{ env.SEMVER }}
 
-      - uses: actions/upload-artifact@v2
-        with:
-          name: apk
-          path: apero.${{ env.SEMVER }}.apk
+
+
