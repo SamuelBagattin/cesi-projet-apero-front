@@ -43,6 +43,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         name: Upload workspace
         with:
+          name: workspace
           path: /tmp/workspace.tar.gz
 
   deploy_apk:
@@ -57,10 +58,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: workspace.tar.gz
-          path: ./workspace.tar.gz
+          path: /tmp/workspace/workspace.tar.gz
 
       - name: Untar workspace
-        run: tree -R && tar -xzf ./workspace.tar.gz && ls -latr
+        run: tree -R && tar -xzf /tmp/workspace.tar.gz -C . && ls -latr
 
       - name: Retreive semver
         run: echo "SEMVER=$(cat './semver.txt')" >> $GITHUB_ENV
